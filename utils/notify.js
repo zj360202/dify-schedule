@@ -228,6 +228,7 @@ export class Notify {
       throw new Error("未配置微秘书Hook地址");
     }
     let res = "";
+    console.log('env.', env)
     if (env.AIBOTK_ROOM_RECIVER) {
       console.log(`微秘书推送给群组：${env.AIBOTK_CONTACT_RECIVER}`);
       res = await axios.post(url + "/openapi/v1/chat/room", {
