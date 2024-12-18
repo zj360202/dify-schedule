@@ -2,7 +2,7 @@ import path from "path";
 import nodemailer from "nodemailer";
 import axios from "axios";
 import env from "./env.js";
-import pkg from "./package.json" assert { type: 'json' };
+import pkg from "../package.json" assert { type: 'json' };
 
 export class Notify {
   /**
@@ -156,7 +156,7 @@ export class Notify {
     return axios.post(url, {
       msgtype: "text",
       text: {
-        content: `${options.title}\n${options.content}`
+        content: `${options.content}`
       }
     });
   }
@@ -205,7 +205,7 @@ export class Notify {
     return axios.post(url, {
       msgtype: "text",
       text: {
-        content: `${options.title}\n${options.content}`
+        content: `${options.content}`
       }
     });
   }
@@ -230,7 +230,7 @@ export class Notify {
             roomName: env.AIBOTK_ROOM_RECIVER,
             message: {
               type: 1,
-              content: `${options.title}\n${options.content}`
+              content: `${options.content}`
             }
           }); 
     }
@@ -240,7 +240,7 @@ export class Notify {
             name: env.AIBOTK_CONTACT_RECIVER,
             message: {
               type: 1,
-              content: `${options.title}\n${options.content}`
+              content: `${options.content}`
             }
           });
     }

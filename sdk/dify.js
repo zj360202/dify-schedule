@@ -342,12 +342,12 @@ export class ChatClient extends DifyClient {
 
 export class WorkflowClient extends DifyClient {
   run(inputs,user,stream) {
-    const data = { 
-      inputs, 
+    const data = {
+      inputs,
       response_mode: stream ? "streaming" : "blocking",
-      user 
+      user
     };
-  
+
     return this.sendRequest(
         routes.runWorkflow.method,
         routes.runWorkflow.url(),
@@ -386,7 +386,7 @@ export class WorkflowClient extends DifyClient {
     function unicodeToChar(text) {
         if (!text)
           return ''
-  
+
         return text.replace(/\\u[0-9a-f]{4}/g, (_match, p1) => {
           return String.fromCharCode(parseInt(p1, 16))
         })
@@ -394,7 +394,6 @@ export class WorkflowClient extends DifyClient {
     const asyncSSE = (stream) => {
         return new Promise((resolve, reject) => {
           let task_id = ''
-          let id = ''
           try {
             stream.on('data', data => {
               const streams = new TextDecoder('utf-8').decode(data, { stream: true }).split('\n')
@@ -404,34 +403,42 @@ export class WorkflowClient extends DifyClient {
                   try {
                     res = JSON.parse(stream.substring(6)) || {}
                   } catch (e) {
-                    console.log('json 解析错误，不影响工作流执行', e)
                     return
                   }
-  
+
                   if (!res.event || res.event === 'error' || res.status === 400) {
                     console.log(`工作流输出错误code:${res.code}`, res.message)
-                    answers.push(res.message)
                     return
                   }
                   if (res.event === 'workflow_started' || res.event === 'tts_message') {
-                      task_id = res.task_id
+                      task_id = res?.workflow_run_id
                       console.log('工作流开始执行')
                   }
                   if (res.event === 'node_started' || res.event=== 'node_finished') {
+                    task_id = res?.workflow_run_id
                     console.log('工作流node节点执行任务中')
                   }
                   if (res.event === 'workflow_finished' || res.event === 'tts_message_end') {
                     console.log('工作流执行完毕，正在组装数据进行发送')
-                    task_id = res.task_id
+                    task_id = res?.workflow_run_id
                   }
                 }
               })
             })
             stream.on('end', async () => {
+
               const { data } = task_id ? await this.result(task_id) : { data: { outputs: '' } }
-              console.log('获取工作流执行结果', JSON.stringify(data))
-          
-              resolve({ text: data.outputs?.text || data.outputs, task_id: task_id })
+              console.log('获取工作流执行结果', task_id, JSON.stringify(data.outputs))
+              let outputs = {}
+              if(data.outputs) {
+                  try {
+                    outputs = JSON.parse(data.outputs)
+                  } catch (error) {
+                    console.log(`获取工作流执行结果,失败:${error}`)
+                  }
+              }
+
+              resolve({ text: outputs?.text, task_id: task_id })
             })
           } catch (e) {
             resolve({ text: `Dify工作流执行出错，${e}`, task_id: '' })
