@@ -1,8 +1,8 @@
 import path from "path";
 import nodemailer from "nodemailer";
 import axios from "axios";
-import env from "./env";
-import pkg from "../package.json";
+import env from "./env.js";
+import pkg from "./package.json" assert { type: 'json' };
 
 export class Notify {
   /**
@@ -234,7 +234,7 @@ export class Notify {
             }
           }); 
     }
-    if((env.AIBOTK_CONTACT_RECIVER) {
+    if (env.AIBOTK_CONTACT_RECIVER) {
         res = await axios.post(url + '/openapi/v1/chat/contact', {
             apiKey: env.AIBOTK_KEY,
             name: env.AIBOTK_CONTACT_RECIVER,

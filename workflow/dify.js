@@ -1,6 +1,6 @@
-import { WorkflowClient } from '../sdk/dify'
-import env from '../env'
-import Notify from "../notify";
+import { WorkflowClient } from '../sdk/dify.js'
+import env from '../env.js'
+import Notify from "../notify.js";
 
 class Task {
     constructor(dify) {
@@ -33,13 +33,14 @@ class WorkflowTask extends Task {
       const user = 'dify-schedule'
       const workflow = new WorkflowClient(this.dify.token, env.DIFY_BASE_URL);
       const info = await workflow.info(user);
+      this.workfolwName = info.data?.name || '';
       console.log(`Dify工作流【${info.data.name}】开始执行...`)
       const response =  await workflow.getWorkflowResult(inputs, user,true)
       this.result = response.text || ''
     }
 
     toString() {
-        return `Dify `
+        return `Dify工作流【${this.workfolwName}】执行结果: ${this.result} \n\n`
     }
 }
 
@@ -51,7 +52,7 @@ async function run(args) {
 
       await workflow.run(); // 执行
   
-      const content = checkin.toString();
+      const content = workflow.toString();
 
       console.log(content); // 打印结果
   
@@ -60,7 +61,7 @@ async function run(args) {
   
     const message = messageList.join(`\n${"-".repeat(15)}\n`);
     notification.pushMessage({
-      title: "掘金每日签到",
+      title: "Dify工作流任务",
       content: message,
       msgtype: "text"
     });
@@ -68,7 +69,7 @@ async function run(args) {
   
   run(process.argv.splice(2)).catch(error => {
     notification.pushMessage({
-      title: "掘金每日签到",
+      title: "Dify工作流任务",
       content: `<strong>Error</strong><pre>${error.message}</pre>`,
       msgtype: "html"
     });
