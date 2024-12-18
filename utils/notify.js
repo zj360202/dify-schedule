@@ -1,4 +1,3 @@
-import path from "path";
 import nodemailer from "nodemailer";
 import axios from "axios";
 import env from "./env.js";
@@ -58,7 +57,7 @@ export class Notify {
 </style>
 <section>
   <header class="dify-header">
-    <img src="cid:logo.png" width="120" height="24" alt="dify" />
+    <img src="cid:logo-site.png" width="120" height="24" alt="dify" />
   </header>
   ${
     this.newVersion.has
@@ -88,8 +87,8 @@ export class Notify {
       attachments: [
         {
           filename: "logo.svg",
-          path: path.resolve(__dirname, "./static/logo.png"),
-          cid: "logo.png", //same cid value as in the html img src
+          path: 'https://cloud.dify.ai/logo/logo-site.png',
+          cid: "logo-site.png", //same cid value as in the html img src
         },
       ],
     });
