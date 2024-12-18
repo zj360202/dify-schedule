@@ -2,7 +2,7 @@ import path from "path";
 import nodemailer from "nodemailer";
 import axios from "axios";
 import env from "./env.js";
-import pkg from "../package.json" assert { type: 'json' };
+import pkg from "../package.json" assert { type: "json" };
 
 export class Notify {
   /**
@@ -12,7 +12,7 @@ export class Notify {
   async email(options) {
     const auth = {
       user: env.EMAIL_USER, // generated ethereal user
-      pass: env.EMAIL_PASS // generated ethereal password
+      pass: env.EMAIL_PASS, // generated ethereal password
     };
 
     if (!auth.user || !auth.pass || auth.user === "" || auth.pass === "") {
@@ -26,8 +26,8 @@ export class Notify {
       auth,
       tls: {
         // do not fail on invalid certs
-        rejectUnauthorized: false
-      }
+        rejectUnauthorized: false,
+      },
     });
 
     const template = `
@@ -66,7 +66,11 @@ export class Notify {
       : ""
   }
   <main class="dify-main">
-    ${options.msgtype === "html" ? options.content : `<pre style="margin: 0;">${options.content}</pre>`}
+    ${
+      options.msgtype === "html"
+        ? options.content
+        : `<pre style="margin: 0;">${options.content}</pre>`
+    }
   </main>
   <footer class="dify-footer">
     <span>Dify工作流定时助手v${pkg.version}</span> |
@@ -85,9 +89,9 @@ export class Notify {
         {
           filename: "logo.svg",
           path: path.resolve(__dirname, "./static/logo.png"),
-          cid: "logo.png" //same cid value as in the html img src
-        }
-      ]
+          cid: "logo.png", //same cid value as in the html img src
+        },
+      ],
     });
   }
 
@@ -110,13 +114,13 @@ export class Notify {
       channel: "wechat",
       webhook: "",
       callbackUrl: "",
-      timestamp: ""
+      timestamp: "",
     };
 
     return axios.post("http://www.pushplus.plus/send", config, {
       headers: {
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     });
   }
 
@@ -133,13 +137,13 @@ export class Notify {
     const config = {
       title: options.title,
       desp: options.content,
-      channel: "9"
+      channel: "9",
     };
 
     return axios.post(`https://sctapi.ftqq.com/${token}.send`, config, {
       headers: {
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     });
   }
 
@@ -156,8 +160,8 @@ export class Notify {
     return axios.post(url, {
       msgtype: "text",
       text: {
-        content: `${options.content}`
-      }
+        content: `${options.content}`,
+      },
     });
   }
 
@@ -178,17 +182,17 @@ export class Notify {
           {
             tag: "markdown",
             content: options.content,
-            text_align: "left"
-          }
+            text_align: "left",
+          },
         ],
         header: {
           template: "blue",
           title: {
             content: options.title,
-            tag: "plain_text"
-          }
-        }
-      }
+            tag: "plain_text",
+          },
+        },
+      },
     });
   }
 
@@ -205,8 +209,8 @@ export class Notify {
     return axios.post(url, {
       msgtype: "text",
       text: {
-        content: `${options.content}`
-      }
+        content: `${options.content}`,
+      },
     });
   }
 
@@ -219,30 +223,34 @@ export class Notify {
    * @param options
    */
   async wimishuWebhook(options) {
-    const url = env.AIBOTK_HOOK ;
+    const url = env.AIBOTK_HOOK;
     if (!url || url === "") {
       throw new Error("未配置微秘书Hook地址");
     }
-    let res = ''
-    if(env.AIBOTK_ROOM_RECIVER) {
-        res = await axios.post(url + '/openapi/v1/chat/room', {
-            apiKey: env.AIBOTK_KEY,
-            roomName: env.AIBOTK_ROOM_RECIVER,
-            message: {
-              type: 1,
-              content: `${options.content}`
-            }
-          }); 
+    let res = "";
+    if (env.AIBOTK_ROOM_RECIVER) {
+      console.log(`微秘书推送给群组：${env.AIBOTK_CONTACT_RECIVER}`);
+      res = await axios.post(url + "/openapi/v1/chat/room", {
+        apiKey: env.AIBOTK_KEY,
+        roomName: env.AIBOTK_ROOM_RECIVER,
+        message: {
+          type: 1,
+          content: `${options.content}`,
+        },
+      });
+      console.log(`微秘书推送给群组结果：${res.data}`);
     }
     if (env.AIBOTK_CONTACT_RECIVER) {
-        res = await axios.post(url + '/openapi/v1/chat/contact', {
-            apiKey: env.AIBOTK_KEY,
-            name: env.AIBOTK_CONTACT_RECIVER,
-            message: {
-              type: 1,
-              content: `${options.content}`
-            }
-          });
+      console.log(`微秘书推送给好友：${env.AIBOTK_CONTACT_RECIVER}`);
+      res = await axios.post(url + "/openapi/v1/chat/contact", {
+        apiKey: env.AIBOTK_KEY,
+        name: env.AIBOTK_CONTACT_RECIVER,
+        message: {
+          type: 1,
+          content: `${options.content}`,
+        },
+      });
+      console.log(`微秘书推送给好友结果：${res.data}`);
     }
     return res;
   }
@@ -250,7 +258,7 @@ export class Notify {
   newVersion = {
     has: false,
     name: pkg.version,
-    url: pkg.homepage
+    url: pkg.homepage,
   };
 
   async checkupdate() {
