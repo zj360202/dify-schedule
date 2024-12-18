@@ -38,7 +38,7 @@ export class Notify {
   }
   .dify-header img {
     width: auto;
-    height: 40px
+    height: 40px;
     object-fit: contain;
     vertical-align: middle;
   }
@@ -80,7 +80,7 @@ export class Notify {
   </main>
   <footer class="dify-footer">
     <span>Dify工作流定时助手v${pkg.version}</span> |
-    <span>Copyright © ${new Date().getFullYear()} <a href="https://github.com/leochen-g"/>Leo_chen</span>
+    <span>Copyright © ${new Date().getFullYear()} <a href="https://github.com/leochen-g" target="_blank">Leo_chen</a></span>
   </footer>
 </section>
 `.trim();
