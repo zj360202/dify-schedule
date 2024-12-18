@@ -34,6 +34,13 @@ export class Notify {
   .dify-header {
     padding: 10px 0;
     border-bottom: 1px solid #f1f1f1;
+    text-align: center;
+  }
+  .dify-header img {
+    width: auto;
+    height: 40px
+    object-fit: contain;
+    vertical-align: middle;
   }
   .dify-update-tip {
     display: flex;
@@ -73,7 +80,7 @@ export class Notify {
   </main>
   <footer class="dify-footer">
     <span>Dify工作流定时助手v${pkg.version}</span> |
-    <span>Copyright © ${new Date().getFullYear()} wechat.aibotk.com</span>
+    <span>Copyright © ${new Date().getFullYear()} <a href="https://github.com/leochen-g"/>Leo_chen</span>
   </footer>
 </section>
 `.trim();
