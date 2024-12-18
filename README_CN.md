@@ -6,7 +6,7 @@
 
 <h1 align="center">Dify工作流定时助手</h1>
 
-<p align="center">定时执行工作流，并发送通知</p>
+<p align="center">由于Dify官方没有定时任务功能，对于一些工作流如果想执行定时任务会比较麻烦，所以才会有这个项目，利用github action 每天定时执行工作流，并发送通知</p>
 
 
 ## 如何使用?
@@ -45,9 +45,9 @@
 
 ## 预览
 
-| Dify工作流执行 |
-|:-----------:|
-| ![Dify工作流执行](https://user-images.githubusercontent.com/24502299/156475511-342cfcd8-3b66-4b9c-8614-215e0b4e08a1.jpg) |
+| Dify工作流执行-微信 | Dify工作流执行-邮件|
+|:-----------:| :-----------:|
+| ![Dify工作流执行](./static/chat.png) |![Dify工作流执行](./static/chat2.png) |
 
 ## 青龙面板使用
 

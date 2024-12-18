@@ -6,9 +6,10 @@
 
 <h1 align="center">Dify Workflow Scheduler</h1>
 
-<p align="center">Schedule workflow execution and send notifications</p>
+<p align="center">Since Dify doesn't have a built-in scheduling feature, executing workflow tasks on a schedule can be challenging. This project leverages GitHub Actions to run workflows daily and send notifications automatically.</p>
 
-[中文文档](./README_zh.md)
+[中文文档](./README_CN.md)
+[日本語](./README_JA.md)
 
 ## How to Use?
 There are two ways to use automated workflows: Quick Start (Online) and Private Deployment (Local)
@@ -46,9 +47,9 @@ Automated Runtime: 06:30 AM Beijing Time
 
 ## Preview
 
-| Dify Workflow Execution |
-|:-----------:|
-| ![Dify Workflow Execution](./static/chat.png) |
+| Dify Workflow Execution - wechat |  Dify Workflow Execution - email |
+|:-----------:|:-----------:|
+| ![Dify Workflow Execution](./static/chat.png) | ![Dify Workflow Execution](./static/chat2.png) |
 
 ## QingLong Panel Usage
 
