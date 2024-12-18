@@ -18,7 +18,8 @@ env:
   SERVERPUSHKEY: ${{ secrets.SERVERPUSHKEY }}
   FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
   AIBOTK_KEY: ${{ secrets.AIBOTK_KEY }}
-  AIBOTK_RECIVER: ${{ secrets.AIBOTK_RECIVER }}
+  AIBOTK_ROOM_RECIVER: ${{ secrets.AIBOTK_ROOM_RECIVER }}
+  AIBOTK_CONTACT_RECIVER: ${{ secrets.AIBOTK_CONTACT_RECIVER }}
 
 jobs:
   DifyWorkflow:
