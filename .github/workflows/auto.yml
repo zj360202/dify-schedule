@@ -28,6 +28,5 @@ jobs:
       - uses: actions/setup-node@v2
       - name: Run Project
         run: |
-          cd workflows
           yarn
           yarn workflowDify
