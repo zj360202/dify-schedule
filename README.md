@@ -56,7 +56,7 @@ Automated Runtime: 06:30 AM Beijing Time
 1. Add subscription in QingLong panel
 
 ```shell
-ql repo https://github.com/leochen-g/ql-juejinhelper.git "ql_" "utils" "sdk"
+ql repo https://github.com/leochen-g/dify-schedule.git "ql_" "utils" "sdk"
 ```
 
 2. Add dependency `axios` in Panel Menu -> Dependency Management -> NodeJs
