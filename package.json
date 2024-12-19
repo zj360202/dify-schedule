@@ -1,7 +1,7 @@
 {
   "name": "dify-schedule",
   "version": "1.0.0",
-  "description": "Dify workflow schedule",
+  "description": "Dify Schedule.A free automated scheduling solution for Dify, powered by GitHub Actions.",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -9,6 +9,7 @@
   },
   "author": "Leo_chen",
   "license": "ISC",
+  "keywords": ["Dify", "Dify Schedule", "Schedule", "Dify Task", "Task", "Auto Schedule"],
   "dependencies": {
     "axios": "^1.7.9",
     "nodemailer": "^6.9.16"
