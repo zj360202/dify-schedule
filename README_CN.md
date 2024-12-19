@@ -54,7 +54,7 @@
 1、在青龙面板添加订阅
 
 ```shell
-ql repo https://github.com/leochen-g/dify-schedul.git "ql_" "utils" "sdk"
+ql repo https://github.com/leochen-g/dify-schedule.git "ql_" "utils" "sdk"
 ```
 2、在面板菜单-依赖管理-NodeJs 添加依赖 `axios`
 
