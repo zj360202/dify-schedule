@@ -29,5 +29,8 @@ jobs:
       - uses: actions/setup-node@v2
       - name: Run Project
         run: |
-          yarn
-          yarn workflowDify
+          rm -rf node_modules yarn.lock
+          yarn cache clean
+          yarn install --frozen-lockfile
+          export NODE_OPTIONS="--max-old-space-size=4096 --openssl-legacy-provider"
+          yarn workflowDify --verbose
